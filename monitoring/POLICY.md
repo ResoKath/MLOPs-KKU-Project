@@ -1,0 +1,9 @@
+# Monitoring and retraining policy
+
+Monitor latest 1,000 requests; at least 100 feature rows for PSI and 100 verified delayed labels for MAE. Data drift: any feature PSI >=0.20. Quality degradation: MAE >max(5 minutes, 1.2 × frozen validation MAE). A changed P(y|X) can cause that signal, but degraded MAE alone does not prove concept drift. Inspect label validity, routes, traffic and seasonal shifts before diagnosing it.
+
+The monitoring loop runs every 60 seconds. Two consecutive distinct degraded label windows create `retrain_request.json`; repeated reads of the identical window do not count as new evidence. Acquire fresh labeled data, preserve chronological train/validation/new test, run the DAG, compare with the incumbent on the same new validation window, and approve only after quality and serving gates. Current pipeline compares against dummy and absolute gates; **incumbent-vs-candidate on fresh data requires operational integration**. Synthetic demo runs the detection → training → registry-version → rollback cycle in isolation. It does not replace a production retraining policy.
+
+Prometheus alert rules cover availability, model readiness, error rate >1%, p95 processing latency >1 second, data drift and prediction quality. HTTP benchmark measures client end-to-end latency; exported histogram measures API processing time. These are different scopes. Alert rules are prepared; actual Prometheus scraping and outbound alert delivery are not tested. No Alertmanager receiver is configured.
+
+SQLite keeps derived features, predictions, model version, request time and later feedback. Avoid exact coordinates and personal IDs in logs. Retain 7 days in a pilot; implement deletion/access controls before deployment. The current code does not enforce retention, authentication or label provenance. Feedback in demos is trusted synthetic/test data. A production feedback endpoint must verify label sources.

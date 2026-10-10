@@ -1,0 +1,12 @@
+.venv/
+.tmp/
+runtime_deps/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+artifacts/
+artifacts-container/
+*.log
+*.zip
+input/mlop.original.ipynb
