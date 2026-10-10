@@ -147,3 +147,14 @@ def test_local_dag_stops_before_training(monkeypatch,tmp_path):
     state = json.loads((tmp_path/"dag_state.json").read_text())
     assert state["states"]["validate"]["status"] == "FAILED"
     assert "train_evaluate_register" not in state["states"]
+
+
+def test_failed_serving_gate_preserves_current_model(tmp_path):
+    from food_delivery.registry import approve
+    (tmp_path/"model.joblib").write_bytes(b"previous approved model")
+    (tmp_path/"candidate.joblib").write_bytes(b"unapproved candidate")
+    (tmp_path/"gate.json").write_text(json.dumps({"passed":True}))
+    (tmp_path/"benchmark.json").write_text(json.dumps({"passed":False}))
+    with pytest.raises(ValueError,match="gate failed"):
+        approve(str(tmp_path))
+    assert (tmp_path/"model.joblib").read_bytes() == b"previous approved model"

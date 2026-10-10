@@ -69,6 +69,8 @@ python -m food_delivery.train --tabpfn --device cuda --out artifacts-tabpfn
 
 มี Git local และ branch ของงาน ดู `git log --oneline --all` ยังไม่มี remote/บัญชีที่ระบุ จึงยังไม่ได้เปิด Pull Request จริง มี `PR_DESCRIPTION.md` ให้ใช้เมื่อ push branch
 
+ชุด ZIP มี `food_delivery_history.bundle` สำหรับคืนประวัติ Git: `git clone food_delivery_history.bundle restored-project` แล้วคัดลอก artifacts/input notebook จาก ZIP ตามต้องการ ไฟล์ผลรันไม่ได้อยู่ใน commit เพราะแยกจาก source
+
 `.github/workflows/ci.yml` ตรวจโค้ด ทดสอบ schema/consistency รัน pipeline ตรวจ model gate และ build image; workflow_dispatch มี deploy demo ใน runner ยังไม่ได้รันบน GitHub หลักฐาน `ci_*.json` เป็นการรันคำสั่งเดียวกันในเครื่องนี้ ไม่ใช่ผล GitHub Actions
 
 ตัวรัน DAG ภายในเป็นค่าเริ่มต้นและได้รันจริงครบทุก node แล้ว ตัวเลือก `--engine prefect` ใช้ Prefect flow/tasks แต่การเริ่ม Prefect server ล้มเหลวใน sandbox เครื่องนี้ จึงยังไม่ยืนยันว่ารันสำเร็จทั้งกระบวนการด้วย Prefect
