@@ -156,3 +156,8 @@ whenever==0.9.5
 yarl==1.20.1
 zipp==3.23.0
 gunicorn==23.0.0; sys_platform != "win32"
+# Linux dependency closure observed during the first real container build.
+greenlet==3.5.6; platform_system == "Linux"
+h2==4.4.1
+hpack==4.2.0
+hyperframe==6.1.0

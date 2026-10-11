@@ -23,6 +23,8 @@ def approve(out="artifacts"):
     mlflow.set_tracking_uri(f"sqlite:///{(out/'mlflow.db').as_posix()}")
     client = MlflowClient()
     name, version = quality["registry_name"], quality["version"]
+    if client.get_model_version(name, str(version)).run_id != quality["run_id"]:
+        raise ValueError("Registry version belongs to another training run")
     bundle = joblib.load(out/"candidate.joblib")
     bundle.metadata.update({"version": version, "registry_name": name, "approval": "approved_local_demo"})
     staged = out/"model.next.joblib"

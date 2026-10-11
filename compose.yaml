@@ -9,6 +9,8 @@ services:
   monitor:
     build: .
     command: ["python", "-m", "food_delivery.watch"]
+    healthcheck:
+      disable: true
     volumes:
       - ./artifacts-container:/app/artifacts
     depends_on:

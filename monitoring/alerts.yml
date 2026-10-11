@@ -7,7 +7,7 @@ groups:
         labels:
           severity: critical
       - alert: DeliveryErrors
-        expr: rate(delivery_requests_total{status="error"}[5m]) / clamp_min(sum(rate(delivery_requests_total[5m])), 0.001) > 0.01
+        expr: sum(rate(delivery_requests_total{status="error"}[5m])) / clamp_min(sum(rate(delivery_requests_total{status=~"success|error"}[5m])), 0.001) > 0.01
         for: 5m
       - alert: DeliveryLatency
         expr: histogram_quantile(0.95, sum by (le) (rate(delivery_processing_seconds_bucket[5m]))) > 1
