@@ -1,5 +1,8 @@
 # รายงานการดำเนินงาน Food Delivery Time Prediction System
 
+> อัปเดต 11 ตุลาคม 2569: TabPFN GPU รอบใหม่ประเมิน test จริงครบ 5,929 แถวแล้ว — MAE 3.1479, RMSE 3.8965, R² 0.8235; ดู [GPU_REPORT.md](GPU_REPORT.md) รายละเอียดด้านล่างที่ระบุ TabPFN/CUDA ยังไม่รันเป็นสถานะของรอบเดิมวันที่ 10 ตุลาคม ผลใหม่ยังไม่ผ่าน size gate และยังไม่ได้วัด GPU serving
+
+
 รายวิชา CP413008 Machine Learning Engineering for Production — สร้างจากไฟล์แนบจริงของผู้ใช้ วันที่ 10 ตุลาคม 2569 (Asia/Bangkok)
 
 ## 1. ผลที่ยืนยันได้ และขอบเขตหลักฐาน
@@ -152,7 +155,7 @@ flowchart TD
 | Schema + corrupt input stops | ผ่านจริง | raw_schema.json, bad_request_demo.json, failed-dag, ci_data.json |
 | Reusable preprocessing / config / consistency | ผ่านจริง | preprocessing.py, MLflow config, consistency.json, JSON reload tests |
 | Baseline + ≥3 experiments | ผ่านจริง | selection.json; MLflow dummy/linear/boosting |
-| Correct TabPFN full test | ยังไม่ได้รัน | continuation notebook และ GPU command พร้อม ไม่มี fabricated output |
+| Correct TabPFN full test | รอบ GPU ใหม่ผ่านจริง | GPU_REPORT.md และ artifacts-tabpfn-gpu/result.json; ไม่ใช่ fitted model เดิมใน Colab |
 | Tracking ครบ 6 ส่วน | ผ่านในรอบใหม่ | run artifacts, environment/data/source hashes, committed source revision |
 | Registry / gating / rollback | ผ่าน local และ isolated simulation | gate/approval/reload/demo; real service restart/container rollback ยังไม่สาธิต |
 | API health / logs / metrics | ผ่าน local | TestClient, HTTP benchmark, SQLite events |

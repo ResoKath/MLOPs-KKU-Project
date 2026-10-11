@@ -1,5 +1,8 @@
 .git
 .venv
+.venv-tabpfn-gpu
+.cache-tabpfn
+artifacts-tabpfn-gpu
 .tmp
 runtime_deps
 artifacts

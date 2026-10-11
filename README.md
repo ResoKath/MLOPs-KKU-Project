@@ -1,5 +1,8 @@
 # Food Delivery Time Prediction — CP413008
 
+อัปเดต 11 ต.ค. 2569: **TabPFN บน GPU ทดสอบ full test ผ่านแล้ว** ดู [GPU_REPORT.md](GPU_REPORT.md), [GPU_SETUP.md](GPU_SETUP.md) และ artifacts-tabpfn-gpu/
+
+
 โครงงานต่อจากไฟล์ `mlop.ipynb` และ `Zomato Dataset.csv` ของผู้ใช้ อ่านผลและข้อจำกัดใน [REPORT.md](REPORT.md) และหลักฐานใน `artifacts/` ก่อนนำไปสาธิต
 
 ## รันจากเครื่องใหม่
@@ -56,14 +59,15 @@ python -m pytest -q
 
 ## TabPFN บน GPU
 
-```sh
-pip install -r requirements-tabpfn.txt
-python -m food_delivery.train --tabpfn --device cuda --out artifacts-tabpfn
+รอบ GPU ใหม่รันจริงด้วย RTX 2050 / PyTorch 2.13.0+cu126 / TabPFN 9.1.0 รายละเอียดและคำสั่งอยู่ใน [GPU_SETUP.md](GPU_SETUP.md) ผล full test และข้อจำกัดอยู่ใน [GPU_REPORT.md](GPU_REPORT.md)
+
+```powershell
+.venv-tabpfn-gpu/Scripts/python.exe scripts/predict_tabpfn_saved.py
 ```
 
-ต้องมี CUDA/PyTorch ที่เข้ากันได้ และ checkpoint/สิทธิ์เข้าถึง TabPFN ตามผู้ให้บริการ ไม่ใส่ token ลงไฟล์หรือ repository คำสั่งนี้ฝึกใหม่ด้วย preprocessing ที่ปรับปรุง จึงเป็นการทดลองใหม่ ไม่ใช่การโหลดโมเดลเดิมจาก Colab ประเมิน TabPFN บน full test ด้วย frozen parameters และบันทึกผล แม้โมเดลอื่นชนะ validation
+คำสั่งนี้โหลด native fitted state ที่ฝึกแล้วพร้อม checkpoint ใน cache และใช้ shared preprocessing โดยไม่ refit ทดสอบกับ raw JSON 5 records ผ่านจริง หากย้ายเครื่องต้องสร้าง environment และดาวน์โหลด checkpoint ด้วยสิทธิ์ของตนเองก่อน ชุด ZIP แบบ compact ไม่รวม environment, checkpoint หรือ credential
 
-ดู `notebooks/continue_original_tabpfn.ipynb` ถ้าต้องการประเมิน **โมเดลเดิม** ใน Colab session ที่ยังมี `model_5000`, `train_processed`, `X_train_5000`, `val_df`, `test_df` และ median เดิมอยู่ โน้ตบุ๊กนี้ไม่มี output เพราะยังไม่ได้รันจริง
+`notebooks/continue_original_tabpfn.ipynb` ยังเป็นขั้นตอนสำหรับ **fitted model เดิม** ที่อยู่ใน Colab session นั้นโดยเฉพาะ ซึ่งยังไม่ได้กู้กลับมา ผล GPU ใหม่ใช้ preprocessing ที่ปรับปรุงและ train-only sample จึงรายงานเป็นอีกการทดลอง
 
 ## Git / CI / rollback
 

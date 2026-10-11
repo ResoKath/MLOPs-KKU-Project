@@ -1,0 +1,8 @@
+# CUDA-enabled PyTorch is installed separately from the official cu126 index.
+# python -m pip --python .venv-tabpfn-gpu install torch==2.13.0 --index-url https://download.pytorch.org/whl/cu126
+tabpfn==9.1.0
+pandas==2.3.0
+numpy==2.3.1
+scikit-learn==1.9.1
+mlflow==3.16.1
+joblib==1.5.3
