@@ -97,6 +97,7 @@ Repository https://github.com/ResoKath/MLOPs-KKU-Project, branch `codex/producti
 
 - ผ่าน: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38129778934
 - deployสาธิตผ่าน: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38129779033
+- sourceฉบับสุดท้ายรวมPrefect + CI + deployผ่าน: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38131419801 (revision a3b2f71)
 - dataเสียถูกปฏิเสธ: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38129810912 (Vehicle_condition9)
 - modelเสื่อมถูกปฏิเสธ: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38129813163 (predictions+20นาที testMAE19.9183)
 

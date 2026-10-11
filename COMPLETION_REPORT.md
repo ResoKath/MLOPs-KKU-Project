@@ -34,6 +34,7 @@ HTTPวัดจากWindowshostภายนอกLinuxcontainer ยังไ�
 - PR: https://github.com/ResoKath/MLOPs-KKU-Project/pull/1
 - CIผ่าน: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38129778934
 - CI+deploydemoผ่าน: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38129779033
+- Sourceฉบับสุดท้าย `a3b2f71` ผ่าน CI + Prefect + deploydemo: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38131419801 ดูevidence/github-final-source-cicd.json
 - datafailตามตั้งใจ: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38129810912
 - modelfailตามตั้งใจ: https://github.com/ResoKath/MLOPs-KKU-Project/actions/runs/38129813163
 
