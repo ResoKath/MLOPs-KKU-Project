@@ -76,7 +76,7 @@ def create_app(model_path=None, log_path=None):
             # Store derived features, never exact GPS, rider/order IDs, or tokens.
             with sqlite3.connect(log_path, timeout=10) as db:
                 db.execute("INSERT INTO events VALUES (?,?,?,?,?,NULL)",
-                    (request_id, time.time(), str(app.state.model.metadata.get("version", "candidate")),
+                    (request_id, time.time(), f"{app.state.model.metadata.get('registry_name','candidate')}:{app.state.model.metadata.get('version','candidate')}",
                      json.dumps(predictions), features.to_json(orient="records")))
             elapsed = time.perf_counter()-start
             with lock:

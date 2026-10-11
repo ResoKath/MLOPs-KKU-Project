@@ -161,7 +161,7 @@ def run(data_path, out="artifacts", with_tabpfn=False, device="cuda", train_rows
             code_paths=["food_delivery"], pip_requirements=[f"{k}=={v}" for k,v in env.items()])
         reloaded = mlflow.sklearn.load_model(info.model_uri)
         np.testing.assert_allclose(bundle.predict(raw_example), reloaded.predict(raw_example), rtol=1e-8)
-    registry_name = f"food-delivery-{selected}"
+    registry_name = f"food-delivery-{selected}{os.environ.get('MODEL_REGISTRY_SUFFIX','')}"
     version = mlflow.register_model(info.model_uri, registry_name)
     client.set_model_version_tag(registry_name, version.version, "approval_status", "candidate_quality_passed")
     client.set_registered_model_alias(registry_name, "candidate", version.version)

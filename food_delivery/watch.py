@@ -14,10 +14,11 @@ def tick(out="artifacts"):
     state_path = out/"monitor_state.json"
     state = json.loads(state_path.read_text()) if state_path.exists() else {"degraded_windows":0,"consumed_labels":[]}
     approval = json.loads((out/"approval.json").read_text())
-    if state.get("model_version") != approval["version"]:
-        state = {"degraded_windows":0,"consumed_labels":[],"model_version":approval["version"]}
+    active_version = f"{approval['registry_name']}:{approval['version']}"
+    if state.get("model_version") != active_version:
+        state = {"degraded_windows":0,"consumed_labels":[],"model_version":active_version}
     result = from_events(out/"reference_features.csv",out/"events.db",out/"monitor_live.json",baseline_mae,
-                         model_version=approval["version"], consumed_labels=state.get("consumed_labels",[]))
+                         model_version=active_version, consumed_labels=state.get("consumed_labels",[]))
     if result["label_rows"] >= 100:
         state["degraded_windows"] = state["degraded_windows"]+1 if result.get("retrain_requested") else 0
         state["consumed_labels"] = list(set(state.get("consumed_labels",[])) | set(result["label_request_ids"]))
