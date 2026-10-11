@@ -77,7 +77,7 @@ python -m pytest -q
 
 `.github/workflows/ci.yml` รันจริงบน GitHub แล้ว: code quality, schema/consistency, DAG, recomputed model gate, Docker build และ deploy demo ดู `evidence/github-*.json` รวมกรณีข้อมูลเสียและการทำนาย +20 นาทีที่ถูกปฏิเสธจริง workflow_dispatch เลือก `inject=none` สำหรับรอบปกติ หรือ `data` / `model` สำหรับรอบที่ตั้งใจให้ fail การ deploy สาธิตตรวจ health และปิดหลังทดสอบ; ไม่ใช่ public production host
 
-ตัวรัน DAG ภายในเป็นค่าเริ่มต้นและได้รันจริงครบทุก node แล้ว ตัวเลือก `--engine prefect` ใช้ Prefect flow/tasks แต่การเริ่ม Prefect server ล้มเหลวใน sandbox เครื่องนี้ จึงยังไม่ยืนยันว่ารันสำเร็จทั้งกระบวนการด้วย Prefect
+ตัวรัน DAG ภายในเป็นค่าเริ่มต้นและผ่านครบทุกnode ตัวเลือก `--engine prefect` รันผ่านจริงในLinuxcontainerแล้ว หลังpinFastAPI0.136.3/Starlette0.52.1ให้เข้ากับPrefect3.6.23 ดู `evidence/prefect-attempt.log` และ `prefect-pipeline.json`; คู่FastAPI0.143.0เดิมทำให้PrefectRouterพังตามupstreamissue CIเพิ่มตรวจPrefectflowเต็มด้วย
 
 `python -m food_delivery.demo` สาธิต data drift, synthetic label shift +12 นาที, retraining และ registry alias rollback ในชื่อแยกจากโมเดลที่ใช้งาน ผลอยู่ใน `drift_retrain_rollback_demo.json`
 

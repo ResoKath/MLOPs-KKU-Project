@@ -89,7 +89,7 @@ Prometheus scrapeจริงและกฎalertด้านavailability/model 
 
 ## 7. DAG Reproducibility Git และ CI/CD
 
-Local DAG: validate→fit/compare/test/register→HTTP gate→approve→monitor บันทึกedges/states/timesและfailureหยุดก่อนtrain ค่าเริ่มต้นรันจริงทั้งWindows/Linux/Docker/GitHub คำสั่ง `docker compose up --build -d` บนvolumeว่างรันครบจนserve restartvolumeเดิมรักษาapprovedmodel OptionalPrefect decoratorsยังไม่ยืนยันflow/serverจริงในสภาพแวดล้อมเดิม; customlocalDAGเป็นตัวรันที่มีหลักฐาน
+Local DAG: validate→fit/compare/test/register→HTTP gate→approve→monitor บันทึกedges/states/timesและfailureหยุดก่อนtrain ค่าเริ่มต้นรันจริงทั้งWindows/Linux/Docker/GitHub คำสั่ง `docker compose up --build -d` บนvolumeว่างรันครบจนserve restartvolumeเดิมรักษาapprovedmodel Prefect flow/serverรันครบจริงในLinuxcontainerด้วยFastAPI0.136.3/Starlette0.52.1 ดูprefect-attempt.log/prefect-pipeline.json; คู่0.143เดิมมีupstreamcompatibilitybugที่แก้ด้วยpins [Prefect issue22398](https://github.com/PrefectHQ/prefect/issues/22398)
 
 Pin Python3.13.5/dependencies รวมLinuxextrasที่พบจากbuildจริง มีDockerimageที่buildและbootจากrawCSVได้ แนะนำรันDAGใหม่เมื่อย้ายเครื่อง เพราะSQLite/artifactURIเดิมเป็นlocalpaths
 
@@ -124,6 +124,7 @@ flowchart TD
     M --> RB[Load previous approved model and restart API]
     CI[GitHub Actions actual pass and fail evidence] --> DAG[Repeatable local DAG]
     DAG --> V
+    PREFECT[Verified Prefect flow in Linux container] --> V
 ```
 
 ## 9. Checklist และข้อคงเหลือ
@@ -139,7 +140,7 @@ flowchart TD
 | Monitoring/data+conceptsignals | Livefeedbackจำลองและscrapeผ่าน; firingหลักฐานในcompletion |
 | Retraining/rollback | Simulationผ่าน; realverifieddata/productionapprovalไม่มี |
 | HostedCI/CD/pass+fail3ด้าน | ผ่าน/ปฏิเสธ/runnerdeploymentจริง |
-| DAG/onecommand/reproducibility | LocalDAG/Docker/GitHubจริง; optionalPrefectยังไม่ยืนยัน |
+| DAG/onecommand/reproducibility | LocalDAG/Docker/GitHubและPrefectflowในLinuxจริง |
 | Git/branch/PR | มีจริงPR1ยังไม่merge |
 | รายงาน/architecture | มีเอกสารและMermaid |
 | สมาชิก/12min/instructorcases | มีDEMO_GUIDE.md; รายชื่อ/contribution/การนำเสนอ/testcasesวันจริงยังไม่มี |

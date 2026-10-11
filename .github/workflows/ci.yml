@@ -28,6 +28,7 @@ jobs:
       - run: python -m ruff check food_delivery tests
       - run: python -m pytest -q
       - run: python -m food_delivery.pipeline
+      - run: python -m food_delivery.pipeline --engine prefect --out artifacts/prefect-ci
       - run: |
           if [ "$INJECT" = none ]; then
             python -m food_delivery.ci_checks

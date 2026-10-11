@@ -58,6 +58,15 @@ def rollback(name, version, out="artifacts"):
     bundle.metadata.update({"version":str(version),"registry_name":name,"approval":"approved_local_demo"})
     staged = out/"model.next.joblib"
     joblib.dump(bundle, staged)
+    previous = (out/"model.joblib").read_bytes() if (out/"model.joblib").exists() else None
     staged.replace(out/"model.joblib")
-    client.set_registered_model_alias(name,"champion",str(version))
+    try:
+        client.set_registered_model_alias(name,"champion",str(version))
+    except Exception:
+        if previous is not None:
+            staged.write_bytes(previous)
+            staged.replace(out/"model.joblib")
+        else:
+            (out/"model.joblib").unlink()
+        raise
     return {"champion":str(version),"restart_required":True}

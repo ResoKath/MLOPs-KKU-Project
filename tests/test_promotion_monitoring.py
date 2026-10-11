@@ -31,7 +31,8 @@ def test_changed_candidate_rejects_stale_evidence(tmp_path):
         identity(tmp_path)
 
 
-def test_alias_failure_restores_live_model(monkeypatch,tmp_path):
+@pytest.mark.parametrize("action",["approve","rollback"])
+def test_alias_failure_restores_live_model(monkeypatch,tmp_path,action):
     from food_delivery import registry
     joblib.dump(SimpleNamespace(metadata={"run_id":"run"}),tmp_path/"candidate.joblib")
     decision = {"passed":True,"run_id":"run","registry_name":"test","version":"2","data_sha256":"data",
@@ -41,13 +42,17 @@ def test_alias_failure_restores_live_model(monkeypatch,tmp_path):
     (tmp_path/"model.joblib").write_bytes(b"previous model")
     class FailingClient:
         def get_model_version(self,*args):
-            return SimpleNamespace(run_id="run")
+            return SimpleNamespace(run_id="run", tags={"approval_status":"approved_local_demo"})
         def set_registered_model_alias(self,*args):
             raise RuntimeError("registry unavailable")
     monkeypatch.setattr(registry,"MlflowClient",FailingClient)
     monkeypatch.setattr(registry.mlflow,"set_tracking_uri",lambda _:None)
+    monkeypatch.setattr(registry.mlflow.sklearn,"load_model",lambda _:SimpleNamespace(metadata={"run_id":"run"}))
     with pytest.raises(RuntimeError,match="registry unavailable"):
-        registry.approve(tmp_path)
+        if action == "approve":
+            registry.approve(tmp_path)
+        else:
+            registry.rollback("test","1",tmp_path)
     assert (tmp_path/"model.joblib").read_bytes() == b"previous model"
 
 

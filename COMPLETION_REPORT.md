@@ -6,7 +6,7 @@
 |---|---|
 | Promotion gate | ผูกcandidatechecksum/run/registryversion/datahashกับHTTPevidence; stalecandidateถูกปฏิเสธ และregistryupdatefailคืนไฟล์เดิม |
 | Incumbent gate | candidateต้องไม่แย่กว่าโมเดลเดิมบนvalidationชุดเดียวกันก่อนtest/registry; รันDAGซ้ำversion4→5ผ่าน MAEเท่ากัน3.3636; มีtestrejectregression |
-| Unit/integration | ล่าสุด21ผ่านบนWindows ดูevidence/tests-windows.xml |
+| Unit/integration | ล่าสุด22ผ่านบนWindows รวมapproval/rollbackaliasfailure ดูevidence/tests-windows.xml |
 | Container | Dockerbuild/Linuxfreshinstall/Compose3services/APIpublishedportผ่าน; pipcheckไม่มีdependencyเสีย ดูrequirements-linux.txt |
 | SLO | 100requests/concurrency4/warmup10: p50 235.64ms, p95 341.55ms, throughput16.50requests/s, error0%; ผ่านSLO1s/10rps/1% |
 | Monitoring | 2หน้าต่างไม่ทับซ้อน≥100labels/หน้าต่าง ผ่านfeedbackAPIจริงและตรวจdataPSI/MAE12/retrainrequest; labels+12นาทีและGPSshiftเป็นการจำลอง |
@@ -16,6 +16,7 @@
 | Git/PR | branchcodex/production-completion และPR1จริง รักษาไฟล์/ประวัติเดิม ยังไม่merge |
 | HostedCI | code/schema/recomputedmodelgate/Dockerbuildผ่าน; data9และpredictions+20ถูกปฏิเสธจริง |
 | CDdemo | GitHubrunnerสร้างcontainer เปิดAPI healthผ่าน แล้วdownสำเร็จ; ไม่มีpublicpersistentdeployment |
+| Prefect | server/flow/tasksครบจนCompletedจริงในLinux หลังpinFastAPI0.136.3/Starlette0.52.1 ดูprefect-attempt.log/prefect-pipeline.json; คู่เดิม0.143มีupstreambug |
 | TabPFN | Fulltest5,929แถวบนCUDAเสร็จก่อนรอบนี้ MAE3.1479, RMSE3.8965, R².8235; candidateยังเกิน100MBgateและไม่มีGPUHTTPbenchmark |
 
 ## ขอบเขตและข้อที่ยังเหลือ
