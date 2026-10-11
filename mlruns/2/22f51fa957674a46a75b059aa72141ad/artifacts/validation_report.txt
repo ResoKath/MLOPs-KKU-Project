@@ -1,0 +1,5 @@
+Status: PASSED
+Rows: 45584
+Cols: 20
+Missing Values: 9131
+Missing Rate: 0.0100

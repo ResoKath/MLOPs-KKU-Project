@@ -1,0 +1,28 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./artifacts-container:/app/artifacts
+    restart: unless-stopped
+  monitor:
+    build: .
+    command: ["python", "-m", "food_delivery.watch"]
+    healthcheck:
+      disable: true
+    volumes:
+      - ./artifacts-container:/app/artifacts
+    depends_on:
+      api:
+        condition: service_healthy
+    restart: unless-stopped
+  prometheus:
+    image: prom/prometheus:v3.2.1
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - ./monitoring/alerts.yml:/etc/prometheus/alerts.yml:ro
+    depends_on:
+      - api

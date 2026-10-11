@@ -1,0 +1,17 @@
+.venv/
+.venv-tabpfn-gpu/
+.cache-tabpfn/
+artifacts-tabpfn-gpu/
+.tmp/
+runtime_deps/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.pyc
+artifacts/
+artifacts-container/
+*.log
+*.zip
+*.bundle
+CHECKSUMS.sha256
+input/mlop.original.ipynb

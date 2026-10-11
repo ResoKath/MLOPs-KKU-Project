@@ -1,0 +1,30 @@
+name: Demonstrate rejected data or model
+on:
+  workflow_dispatch:
+    inputs:
+      layer:
+        description: Deliberately rejected input; this run should fail
+        required: true
+        default: data
+        type: choice
+        options: [data, model]
+jobs:
+  reject:
+    runs-on: ubuntu-latest
+    env:
+      OMP_NUM_THREADS: 2
+      OPENBLAS_NUM_THREADS: 2
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m food_delivery.pipeline
+      - run: python -m food_delivery.ci_checks --inject ${{ inputs.layer }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: rejected-${{ inputs.layer }}-evidence
+          path: artifacts/

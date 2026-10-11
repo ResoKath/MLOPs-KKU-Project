@@ -1,0 +1,172 @@
+{
+  "engine": "local explicit DAG executor",
+  "edges": {
+    "validate": [],
+    "train_evaluate_register": [
+      "validate"
+    ],
+    "http_gate": [
+      "train_evaluate_register"
+    ],
+    "approve": [
+      "http_gate"
+    ],
+    "monitor": [
+      "approve"
+    ]
+  },
+  "states": {
+    "validate": {
+      "status": "PASSED",
+      "seconds": 0.31298100005369633
+    },
+    "train_evaluate_register": {
+      "status": "PASSED",
+      "seconds": 29.370577699970454
+    },
+    "http_gate": {
+      "status": "PASSED",
+      "seconds": 9.274925800040364
+    },
+    "approve": {
+      "status": "PASSED",
+      "seconds": 0.1028663000324741
+    },
+    "monitor": {
+      "status": "PASSED",
+      "seconds": 0.09430649993009865
+    }
+  },
+  "results": {
+    "validate": {
+      "raw_rows": 45584,
+      "invalid_gps_rows": 4071,
+      "distance_excluded_rows": 0,
+      "missing": {
+        "ID": 0,
+        "Delivery_person_ID": 0,
+        "Delivery_person_Age": 1854,
+        "Delivery_person_Ratings": 1908,
+        "Restaurant_latitude": 0,
+        "Restaurant_longitude": 0,
+        "Delivery_location_latitude": 0,
+        "Delivery_location_longitude": 0,
+        "Order_Date": 0,
+        "Time_Orderd": 1731,
+        "Time_Order_picked": 0,
+        "Weather_conditions": 616,
+        "Road_traffic_density": 601,
+        "Vehicle_condition": 0,
+        "Type_of_order": 0,
+        "Type_of_vehicle": 0,
+        "multiple_deliveries": 993,
+        "Festival": 228,
+        "City": 1200,
+        "Time_taken (min)": 0
+      },
+      "duplicates": 0,
+      "train": {
+        "rows": 29674,
+        "start": "2022-02-11",
+        "end": "2022-03-25"
+      },
+      "validation": {
+        "rows": 5910,
+        "start": "2022-03-26",
+        "end": "2022-03-31"
+      },
+      "test": {
+        "rows": 5929,
+        "start": "2022-04-01",
+        "end": "2022-04-06"
+      }
+    },
+    "train_evaluate_register": {
+      "passed": true,
+      "max_mae": 5.0,
+      "registry_name": "food-delivery-hist_gradient_boosting",
+      "version": 5,
+      "run_id": "11fe895bd20043cfa4db688f66f76994",
+      "data_sha256": "e33e182ebb9c1d7e0f54c83c0cef6ddc5aa98d203e8888d33ab68cca3a079cba",
+      "candidate_sha256": "efa5ee7b83b45d331d7b9e72f603320105bda194b97cac34b63eeff1ac0d975c",
+      "model_uri": "models:/m-c3e8ce370e6c4a5695a98a4c05001df5",
+      "registry_reload": "PASSED",
+      "selected": "hist_gradient_boosting",
+      "status": "candidate; API latency/artifact gates required before approval"
+    },
+    "http_gate": {
+      "samples": 100,
+      "concurrency": 4,
+      "warmup_requests": 10,
+      "p50_seconds": 0.1731080999597907,
+      "p95_seconds": 0.23936857492662966,
+      "throughput_requests_per_second": 22.60209155678138,
+      "error_rate": 0.0,
+      "elapsed_seconds": 4.424369300017133,
+      "scope": "HTTP client measurement; one record/request; deployment context recorded by caller",
+      "target_url": "http://127.0.0.1:8765",
+      "slo": {
+        "p95_seconds_max": 1.0,
+        "throughput_min": 10.0,
+        "error_rate_max": 0.01
+      },
+      "passed": true,
+      "identity": {
+        "run_id": "11fe895bd20043cfa4db688f66f76994",
+        "registry_name": "food-delivery-hist_gradient_boosting",
+        "version": 5,
+        "candidate_sha256": "efa5ee7b83b45d331d7b9e72f603320105bda194b97cac34b63eeff1ac0d975c",
+        "data_sha256": "e33e182ebb9c1d7e0f54c83c0cef6ddc5aa98d203e8888d33ab68cca3a079cba"
+      }
+    },
+    "approve": {
+      "registry_name": "food-delivery-hist_gradient_boosting",
+      "version": 5,
+      "artifact_bytes": 877632,
+      "status": "approved_local_demo",
+      "scope": "local quality and HTTP gates; not evidence of container or cloud deployment"
+    },
+    "monitor": {
+      "status": "evaluated",
+      "rows": 110,
+      "psi": {
+        "Delivery_person_Age": 12.50913952503953,
+        "Delivery_person_Ratings": 13.218854910766698,
+        "distance_km": 12.429364777580165,
+        "Weather_conditions": 11.483852350587686,
+        "Road_traffic_density": 13.510323927476975,
+        "Vehicle_condition": 9.237253509536497,
+        "Type_of_order": 10.364950582309795,
+        "Type_of_vehicle": 5.395552325078935,
+        "Festival": 0.23793679257798328,
+        "City": 3.093443210512878,
+        "order_hour": 12.437145168843339,
+        "order_minute": 12.794920483271511,
+        "order_time_missing": 0.0
+      },
+      "data_drift": true,
+      "drifted_features": [
+        "Delivery_person_Age",
+        "Delivery_person_Ratings",
+        "distance_km",
+        "Weather_conditions",
+        "Road_traffic_density",
+        "Vehicle_condition",
+        "Type_of_order",
+        "Type_of_vehicle",
+        "Festival",
+        "City",
+        "order_hour",
+        "order_minute"
+      ],
+      "quality_status": "labels_unavailable",
+      "retrain_requested": false,
+      "alert": true,
+      "window": "latest 1000 requests; minimum 100 feature/label rows",
+      "label_window_id": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "label_rows": 0,
+      "label_request_ids": [],
+      "model_version": "food-delivery-hist_gradient_boosting:5"
+    }
+  }
+}

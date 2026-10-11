@@ -1,0 +1,10 @@
+.git
+.venv
+.tmp
+runtime_deps
+artifacts
+artifacts-container
+*.zip
+*.log
+__pycache__
+input/mlop.original.ipynb

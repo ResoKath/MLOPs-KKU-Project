@@ -1,0 +1,28 @@
+{
+  "status": "EVALUATION_PASSED",
+  "run_id": "6fb4ee943a164825866a2397380b0a7a",
+  "validation": {
+    "mae": 3.1467660232382757,
+    "rmse": 3.9119901552909386,
+    "r2": 0.8303912515072732,
+    "within_5_minutes": 0.8186125211505922
+  },
+  "test": {
+    "mae": 3.1479487267472717,
+    "rmse": 3.8965097710952357,
+    "r2": 0.8235373319402143,
+    "within_5_minutes": 0.8168325181312194
+  },
+  "test_rows": 5929,
+  "preprocessing_consistency": "PASSED",
+  "logged_model_reload": "PASSED",
+  "registry_reload": "PASSED",
+  "registry_name": "food-delivery-tabpfn-gpu",
+  "version": 1,
+  "quality_gate_passed": true,
+  "packaged_model_bytes": 876163246,
+  "peak_torch_gpu_allocated_bytes": 1327057920,
+  "existing_100MB_size_gate_passed": false,
+  "serving_gate": "not measured; no production/champion promotion",
+  "scope": "new training run; revised Excel-time preprocessing; not original Colab fitted weights"
+}

@@ -1,0 +1,66 @@
+{
+  "timestamp": "2026-10-11T17:22:13.9971998+07:00",
+  "health": {
+    "status": "ready",
+    "model": {
+      "name": "hist_gradient_boosting",
+      "run_id": "8e66e2904dc94a1fa7ba739034b9d1cc",
+      "version": 1,
+      "registry_name": "food-delivery-hist_gradient_boosting",
+      "approval": "approved_local_demo"
+    }
+  },
+  "prediction": {
+    "request_id": "5cc50bf5-0cb2-47af-ac6a-9b5812b83bba",
+    "predictions_minutes": [
+      33.66512281234826,
+      18.199712029765237,
+      24.745411644513496,
+      12.550345619616929,
+      22.02219332688836
+    ],
+    "model": {
+      "name": "hist_gradient_boosting",
+      "run_id": "8e66e2904dc94a1fa7ba739034b9d1cc",
+      "version": 1,
+      "registry_name": "food-delivery-hist_gradient_boosting",
+      "approval": "approved_local_demo"
+    },
+    "processing_seconds": 0.09239235199993345
+  },
+  "prometheus": {
+    "status": "success",
+    "data": {
+      "activeTargets": [
+        {
+          "discoveredLabels": {
+            "__address__": "api:8000",
+            "__metrics_path__": "/metrics",
+            "__scheme__": "http",
+            "__scrape_interval__": "15s",
+            "__scrape_timeout__": "10s",
+            "job": "food-delivery"
+          },
+          "labels": {
+            "instance": "api:8000",
+            "job": "food-delivery"
+          },
+          "scrapePool": "food-delivery",
+          "scrapeUrl": "http://api:8000/metrics",
+          "globalUrl": "http://api:8000/metrics",
+          "lastError": "",
+          "lastScrape": "2026-10-11T10:22:12.381979271Z",
+          "lastScrapeDuration": 0.004526982,
+          "health": "up",
+          "scrapeInterval": "15s",
+          "scrapeTimeout": "10s"
+        }
+      ],
+      "droppedTargets": [],
+      "droppedTargetCounts": {
+        "food-delivery": 0
+      }
+    }
+  },
+  "scope": "Final pinned environment; Windows host to Linux container"
+}

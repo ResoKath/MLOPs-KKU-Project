@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "stages": {
+    "baseline": {
+      "request_id": "ba387752-03ba-4dbd-a225-2b7824eacb67",
+      "predictions_minutes": [
+        33.66512281234826,
+        18.199712029765237,
+        24.745411644513496,
+        12.550345619616929,
+        22.02219332688836
+      ],
+      "model": {
+        "name": "hist_gradient_boosting",
+        "run_id": "a01fd1d2861543798945c4e45fcfcdba",
+        "version": 1,
+        "registry_name": "food-delivery-hist_gradient_boosting-synthetic-demo",
+        "approval": "approved_local_demo"
+      },
+      "processing_seconds": 0.08750609600019743
+    },
+    "retrain": {
+      "request_id": "afa5e993-e55e-4f2a-9048-4fa39214e9e7",
+      "predictions_minutes": [
+        45.66512281234826,
+        30.19971202976525,
+        36.74541164451349,
+        24.550345619616934,
+        34.02219332688843
+      ],
+      "model": {
+        "name": "hist_gradient_boosting",
+        "run_id": "a4bef2e1ca9c477693627e3a0e78e076",
+        "version": 2,
+        "registry_name": "food-delivery-hist_gradient_boosting-synthetic-demo",
+        "approval": "approved_local_demo"
+      },
+      "processing_seconds": 0.08558383599984154
+    },
+    "rollback": {
+      "request_id": "7153feff-9e2c-4283-9c58-540f03cf0b0e",
+      "predictions_minutes": [
+        33.66512281234826,
+        18.199712029765237,
+        24.745411644513496,
+        12.550345619616929,
+        22.02219332688836
+      ],
+      "model": {
+        "name": "hist_gradient_boosting",
+        "run_id": "a01fd1d2861543798945c4e45fcfcdba",
+        "version": "1",
+        "registry_name": "food-delivery-hist_gradient_boosting-synthetic-demo",
+        "approval": "approved_local_demo"
+      },
+      "processing_seconds": 0.0870073709997996
+    }
+  },
+  "prediction_change_minutes": 12.000000000000018,
+  "scope": "actual container HTTP and isolated synthetic registry, simulated +12 minute target shift; original live model restored afterwards"
+}

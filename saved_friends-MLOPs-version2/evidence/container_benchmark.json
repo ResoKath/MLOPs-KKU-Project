@@ -1,0 +1,18 @@
+{
+  "samples": 100,
+  "concurrency": 4,
+  "warmup_requests": 10,
+  "p50_seconds": 0.2356423000455834,
+  "p95_seconds": 0.34154580008471386,
+  "throughput_requests_per_second": 16.500416990255232,
+  "error_rate": 0.0,
+  "elapsed_seconds": 6.060452900012024,
+  "scope": "Windows host to Linux Docker published port; 100 requests, concurrency 4, one record/request",
+  "target_url": "http://127.0.0.1:8000",
+  "slo": {
+    "p95_seconds_max": 1.0,
+    "throughput_min": 10.0,
+    "error_rate_max": 0.01
+  },
+  "passed": true
+}
