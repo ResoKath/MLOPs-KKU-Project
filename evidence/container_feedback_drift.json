@@ -1,0 +1,108 @@
+{
+  "scope": "real API feedback and monitor execution, deliberately synthetic +12 minute labels and coordinate drift",
+  "windows": [
+    {
+      "status": "evaluated",
+      "rows": 210,
+      "psi": {
+        "Delivery_person_Age": 12.50913952503953,
+        "Delivery_person_Ratings": 13.218854910766698,
+        "distance_km": 10.49532793955652,
+        "Weather_conditions": 11.483852350587686,
+        "Road_traffic_density": 13.510323927476975,
+        "Vehicle_condition": 9.237253509536497,
+        "Type_of_order": 10.364950582309795,
+        "Type_of_vehicle": 5.395552325078935,
+        "Festival": 0.23793679257798328,
+        "City": 3.093443210512878,
+        "order_hour": 12.437145168843339,
+        "order_minute": 12.794920483271511,
+        "order_time_missing": 0.0
+      },
+      "data_drift": true,
+      "drifted_features": [
+        "Delivery_person_Age",
+        "Delivery_person_Ratings",
+        "distance_km",
+        "Weather_conditions",
+        "Road_traffic_density",
+        "Vehicle_condition",
+        "Type_of_order",
+        "Type_of_vehicle",
+        "Festival",
+        "City",
+        "order_hour",
+        "order_minute"
+      ],
+      "quality_status": "degraded",
+      "retrain_requested": true,
+      "mae": 12.0,
+      "mean_residual": 12.0,
+      "quality_threshold": 5.0,
+      "concept_drift_signal": true,
+      "interpretation": "label-based degradation signal; investigate changes in P(y|X), label quality and service conditions",
+      "alert": true,
+      "window": "latest 1000 requests; minimum 100 feature/label rows",
+      "label_window_id": "9042f80afd1c2319f85a621e7538714f49f69ebdc436e3099cf54c1304f8c6dc",
+      "label_rows": 100,
+      "label_request_ids": [
+        "b899156f-facb-47f9-9ee6-7f7de31d94e5"
+      ],
+      "model_version": "food-delivery-hist_gradient_boosting:1"
+    },
+    {
+      "status": "evaluated",
+      "rows": 310,
+      "psi": {
+        "Delivery_person_Age": 12.50913952503953,
+        "Delivery_person_Ratings": 13.218854910766698,
+        "distance_km": 10.545880272046807,
+        "Weather_conditions": 11.483852350587686,
+        "Road_traffic_density": 13.510323927476975,
+        "Vehicle_condition": 9.237253509536497,
+        "Type_of_order": 10.364950582309795,
+        "Type_of_vehicle": 5.395552325078935,
+        "Festival": 0.23793679257798328,
+        "City": 3.093443210512878,
+        "order_hour": 12.437145168843339,
+        "order_minute": 12.794920483271511,
+        "order_time_missing": 0.0
+      },
+      "data_drift": true,
+      "drifted_features": [
+        "Delivery_person_Age",
+        "Delivery_person_Ratings",
+        "distance_km",
+        "Weather_conditions",
+        "Road_traffic_density",
+        "Vehicle_condition",
+        "Type_of_order",
+        "Type_of_vehicle",
+        "Festival",
+        "City",
+        "order_hour",
+        "order_minute"
+      ],
+      "quality_status": "degraded",
+      "retrain_requested": true,
+      "mae": 12.0,
+      "mean_residual": 12.0,
+      "quality_threshold": 5.0,
+      "concept_drift_signal": true,
+      "interpretation": "label-based degradation signal; investigate changes in P(y|X), label quality and service conditions",
+      "alert": true,
+      "window": "latest 1000 requests; minimum 100 feature/label rows",
+      "label_window_id": "c09182601129a91447739b0dbb45481e0a2b1dd7ee4d409f124e7eec4fe55c24",
+      "label_rows": 100,
+      "label_request_ids": [
+        "444b55ef-65b7-483f-b5a1-6890af423bef"
+      ],
+      "model_version": "food-delivery-hist_gradient_boosting:1"
+    }
+  ],
+  "retrain_request": {
+    "reason": "delayed-label MAE degraded",
+    "status": "review fresh labeled data and run pipeline",
+    "policy": "minimum 100 new labels per non-overlapping window; label verification requires human review; preserve new chronological test"
+  }
+}

@@ -1,0 +1,18 @@
+# TYPE delivery_requests_total counter
+delivery_requests_total{status="success"} 110
+delivery_requests_total{status="invalid"} 3
+delivery_requests_total{status="error"} 0
+# TYPE delivery_processing_seconds histogram
+delivery_processing_seconds_bucket{le="0.05"} 0
+delivery_processing_seconds_bucket{le="0.1"} 11
+delivery_processing_seconds_bucket{le="0.25"} 107
+delivery_processing_seconds_bucket{le="0.5"} 110
+delivery_processing_seconds_bucket{le="1.0"} 110
+delivery_processing_seconds_bucket{le="2.0"} 110
+delivery_processing_seconds_bucket{le="5.0"} 110
+delivery_processing_seconds_bucket{le="+Inf"} 110
+delivery_processing_seconds_sum 16.33287401300049
+delivery_processing_seconds_count 110
+delivery_model_ready 1
+delivery_data_drift 0
+delivery_quality_degraded 0

@@ -15,7 +15,7 @@ docker compose up --build
 
 คำสั่งนี้สร้าง environment, รัน DAG ภายใน, ตรวจข้อมูล, ฝึกสามโมเดล, เลือกจาก validation, ประเมิน full test, บันทึก MLflow, วัด HTTP, อนุมัติสำหรับ local demo แล้วเปิด API ที่ http://localhost:8000/docs และ Prometheus ที่ http://localhost:9090 ผลเก็บใน `artifacts-container/` ระหว่าง pipeline ยังทำงาน `/health/ready` อาจยังไม่พร้อม ตรวจ `docker compose logs api`
 
-**Dockerfile/Compose ยังไม่ได้ build หรือรันจริงบนเครื่องที่จัดทำงานนี้ เพราะ Docker engine ไม่ทำงาน** การรันบนเครื่องใหม่จึงต้องตรวจซ้ำตามขั้นตอนนี้ สถานะ `approved_local_demo` ไม่ใช่การอนุมัติ production
+**Docker build/Compose/API และ Prometheus รันจริงผ่านแล้ววันที่ 11 ต.ค. 2569** ดู `evidence/container_acceptance.json` และ `evidence/container_benchmark.json` ผ่าน published port จาก Windows host: p50 236 ms, p95 342 ms, throughput 16.5 requests/s, errors 0/100 สถานะ `approved_local_demo` เป็นการอนุมัติสาธิต เมื่อ restart โหลดโมเดลที่อนุมัติไว้; เมื่อ volume ว่างรัน DAG ก่อนเปิด API
 
 ## รันด้วย Python
 
@@ -71,11 +71,11 @@ python -m pytest -q
 
 ## Git / CI / rollback
 
-มี Git local และ branch ของงาน ดู `git log --oneline --all` ยังไม่มี remote/บัญชีที่ระบุ จึงยังไม่ได้เปิด Pull Request จริง มี `PR_DESCRIPTION.md` ให้ใช้เมื่อ push branch
+งานอยู่ที่ branch `codex/production-completion` ของ [repository กลุ่ม](https://github.com/ResoKath/MLOPs-KKU-Project) และ [PR #1](https://github.com/ResoKath/MLOPs-KKU-Project/pull/1) คงไฟล์และประวัติเดิมของกลุ่มไว้; ยังไม่ได้ merge
 
 ชุด ZIP มี `food_delivery_history.bundle` สำหรับคืนประวัติ Git: `git clone food_delivery_history.bundle restored-project` แล้วคัดลอก artifacts/input notebook จาก ZIP ตามต้องการ ไฟล์ผลรันไม่ได้อยู่ใน commit เพราะแยกจาก source
 
-`.github/workflows/ci.yml` ตรวจโค้ด ทดสอบ schema/consistency รัน pipeline ตรวจ model gate และ build image; workflow_dispatch มี deploy demo ใน runner ยังไม่ได้รันบน GitHub หลักฐาน `ci_*.json` เป็นการรันคำสั่งเดียวกันในเครื่องนี้ ไม่ใช่ผล GitHub Actions
+`.github/workflows/ci.yml` รันจริงบน GitHub แล้ว: code quality, schema/consistency, DAG, recomputed model gate, Docker build และ deploy demo ดู `evidence/github-*.json` รวมกรณีข้อมูลเสียและการทำนาย +20 นาทีที่ถูกปฏิเสธจริง workflow_dispatch เลือก `inject=none` สำหรับรอบปกติ หรือ `data` / `model` สำหรับรอบที่ตั้งใจให้ fail การ deploy สาธิตตรวจ health และปิดหลังทดสอบ; ไม่ใช่ public production host
 
 ตัวรัน DAG ภายในเป็นค่าเริ่มต้นและได้รันจริงครบทุก node แล้ว ตัวเลือก `--engine prefect` ใช้ Prefect flow/tasks แต่การเริ่ม Prefect server ล้มเหลวใน sandbox เครื่องนี้ จึงยังไม่ยืนยันว่ารันสำเร็จทั้งกระบวนการด้วย Prefect
 

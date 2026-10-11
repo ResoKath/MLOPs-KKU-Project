@@ -1,0 +1,24 @@
+{
+  "incumbent": {
+    "name": "hist_gradient_boosting",
+    "run_id": "e8f5551b19884754a344b3cbb5bc8748",
+    "version": 4,
+    "registry_name": "food-delivery-hist_gradient_boosting",
+    "approval": "approved_local_demo"
+  },
+  "incumbent_validation": {
+    "mae": 3.363554398539753,
+    "rmse": 4.242016161448773,
+    "r2": 0.8005668353596431,
+    "within_5_minutes": 0.770896785109983
+  },
+  "candidate_validation": {
+    "mae": 3.363554398539753,
+    "rmse": 4.242016161448773,
+    "r2": 0.8005668353596431,
+    "within_5_minutes": 0.770896785109983,
+    "fit_validation_seconds": 1.9574201999930665
+  },
+  "passed": true,
+  "scope": "same supplied validation window; fresh verified business data is not supplied automatically"
+}

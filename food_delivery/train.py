@@ -55,6 +55,11 @@ def gate(validation, dummy_mae, test=None, max_mae=5.0):
     return bool(passed)
 
 
+def incumbent_gate(candidate_mae, incumbent_mae):
+    return bool(np.isfinite(candidate_mae) and np.isfinite(incumbent_mae)
+                and candidate_mae <= incumbent_mae + 1e-9)
+
+
 def estimators(with_tabpfn=False, device="cuda"):
     encoding = ColumnTransformer([
         ("categories", OneHotEncoder(handle_unknown="ignore", sparse_output=False), list(CATEGORIES)),
@@ -140,6 +145,22 @@ def run(data_path, out="artifacts", with_tabpfn=False, device="cuda", train_rows
     if not gate(results[selected], results["dummy"]["mae"], max_mae=max_mae):
         write_json(out/"gate.json", {"passed": False, "reason": "validation gate", "selected": selected})
         raise ValueError("Validation quality gate failed; test and deployment blocked")
+    # Compare frozen candidate to the deployed model on the same validation data.
+    # Never use the test set to choose between versions.
+    if (out/"model.joblib").exists():
+        incumbent = joblib.load(out/"model.joblib")
+        previous = metrics(val[TARGET],batched_predict(incumbent,val))
+        comparison = {"incumbent":incumbent.metadata,"incumbent_validation":previous,
+                      "candidate_validation":results[selected],
+                      "passed":incumbent_gate(results[selected]["mae"],previous["mae"]),
+                      "scope":"same supplied validation window; fresh verified business data is not supplied automatically"}
+        write_json(out/"incumbent_comparison.json",comparison)
+        with mlflow.start_run(run_id=run_ids[selected]):
+            mlflow.log_dict(comparison,"incumbent_comparison.json")
+            mlflow.log_metric("incumbent_validation_mae",previous["mae"])
+        if not comparison["passed"]:
+            write_json(out/"gate.json",{"passed":False,"reason":"candidate worse than incumbent on validation"})
+            raise ValueError("Incumbent quality gate failed; test and registration blocked")
     test_results = {}
     for name in sorted(set([selected] + (["tabpfn"] if with_tabpfn else []))):
         prediction = batched_predict(trained[name], test)

@@ -1,0 +1,52 @@
+{
+  "health": {
+    "status": "ready",
+    "model": {
+      "name": "hist_gradient_boosting",
+      "run_id": "8e66e2904dc94a1fa7ba739034b9d1cc",
+      "version": 1,
+      "registry_name": "food-delivery-hist_gradient_boosting",
+      "approval": "approved_local_demo"
+    }
+  },
+  "bad_payload_statuses": [
+    422,
+    422,
+    422
+  ],
+  "prometheus_targets": {
+    "status": "success",
+    "data": {
+      "activeTargets": [
+        {
+          "discoveredLabels": {
+            "__address__": "api:8000",
+            "__metrics_path__": "/metrics",
+            "__scheme__": "http",
+            "__scrape_interval__": "15s",
+            "__scrape_timeout__": "10s",
+            "job": "food-delivery"
+          },
+          "labels": {
+            "instance": "api:8000",
+            "job": "food-delivery"
+          },
+          "scrapePool": "food-delivery",
+          "scrapeUrl": "http://api:8000/metrics",
+          "globalUrl": "http://api:8000/metrics",
+          "lastError": "",
+          "lastScrape": "2026-10-11T09:56:27.445034336Z",
+          "lastScrapeDuration": 0.156880232,
+          "health": "up",
+          "scrapeInterval": "15s",
+          "scrapeTimeout": "10s"
+        }
+      ],
+      "droppedTargets": [],
+      "droppedTargetCounts": {
+        "food-delivery": 0
+      }
+    }
+  },
+  "scope": "actual published port; no second physical machine or internet deployment"
+}

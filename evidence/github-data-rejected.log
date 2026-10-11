@@ -1,0 +1,37 @@
+quality	Run if [ "$INJECT" = none ]; then	﻿2026-10-11T09:51:56.8138357Z ##[group]Run if [ "$INJECT" = none ]; then
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8138612Z ^[[36;1mif [ "$INJECT" = none ]; then^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8138794Z ^[[36;1m  python -m food_delivery.ci_checks^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8138954Z ^[[36;1melse^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8139122Z ^[[36;1m  python -m food_delivery.ci_checks --inject "$INJECT"^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8139315Z ^[[36;1mfi^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8194336Z shell: /usr/bin/bash -e {0}
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8194502Z env:
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8194623Z   OMP_NUM_THREADS: 2
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8194757Z   OPENBLAS_NUM_THREADS: 2
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8195001Z   PREFECT_HOME: /home/runner/work/MLOPs-KKU-Project/MLOPs-KKU-Project/artifacts/prefect
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8195268Z   PREFECT_SERVER_ANALYTICS_ENABLED: false
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8195625Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.5/x64
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8195869Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.5/x64/lib/pkgconfig
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8196107Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.5/x64
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8196511Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.5/x64
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8196728Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.5/x64
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8196950Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.5/x64/lib
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8197139Z   INJECT: data
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:56.8197258Z ##[endgroup]
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.2658405Z All checks passed!
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6624728Z Traceback (most recent call last):
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6634732Z   File "<frozen runpy>", line 198, in _run_module_as_main
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6635017Z   File "<frozen runpy>", line 88, in _run_code
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6635511Z   File "/home/runner/work/MLOPs-KKU-Project/MLOPs-KKU-Project/food_delivery/ci_checks.py", line 44, in <module>
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6635851Z     print(json.dumps(checks(a.data,inject=a.inject),indent=2))
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6636061Z                      ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6636368Z   File "/home/runner/work/MLOPs-KKU-Project/MLOPs-KKU-Project/food_delivery/ci_checks.py", line 26, in checks
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6636697Z     prepare_data(data)
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6636827Z     ~~~~~~~~~~~~^^^^^^
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6637120Z   File "/home/runner/work/MLOPs-KKU-Project/MLOPs-KKU-Project/food_delivery/preprocessing.py", line 145, in prepare_data
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6637875Z     data, gps_ok = validate_raw(raw, training=True, allow_invalid_gps=True)
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6638187Z                    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6638657Z   File "/home/runner/work/MLOPs-KKU-Project/MLOPs-KKU-Project/food_delivery/preprocessing.py", line 62, in validate_raw
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6639087Z     raise ValueError(f"{col}: unsupported category")
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:58.6639363Z ValueError: Vehicle_condition: unsupported category
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:51:59.1708731Z ##[error]Process completed with exit code 1.
