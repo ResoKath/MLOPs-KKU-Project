@@ -3,6 +3,13 @@ on:
   push:
   pull_request:
   workflow_dispatch:
+    inputs:
+      inject:
+        description: Deliberately reject bad data or predictions; none is normal deployment
+        required: true
+        default: none
+        type: choice
+        options: [none, data, model]
 jobs:
   quality:
     runs-on: ubuntu-latest
@@ -21,7 +28,14 @@ jobs:
       - run: python -m ruff check food_delivery tests
       - run: python -m pytest -q
       - run: python -m food_delivery.pipeline
-      - run: python -m food_delivery.ci_checks
+      - run: |
+          if [ "$INJECT" = none ]; then
+            python -m food_delivery.ci_checks
+          else
+            python -m food_delivery.ci_checks --inject "$INJECT"
+          fi
+        env:
+          INJECT: ${{ inputs.inject || 'none' }}
       - run: docker build -t food-delivery:${{ github.sha }} .
       - uses: actions/upload-artifact@v4
         if: always()
@@ -30,7 +44,7 @@ jobs:
           path: artifacts/
   deploy-demo:
     needs: quality
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' && inputs.inject == 'none'
     runs-on: ubuntu-latest
     environment: demo
     steps:
