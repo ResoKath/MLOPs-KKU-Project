@@ -7,11 +7,13 @@ from pathlib import Path
 import httpx
 
 from food_delivery.benchmark import benchmark
+from food_delivery.evidence import identity
 from food_delivery.train import write_json
 
 
 def serving_gate(output):
     output = Path(output).resolve()
+    bound = identity(output)
     env = os.environ.copy()
     env["MODEL_PATH"] = str(output/"candidate.joblib")
     env["EVENT_DB"] = str(output/"events.db")
@@ -33,6 +35,10 @@ def serving_gate(output):
         else:
             raise RuntimeError("API readiness timeout")
         measured = benchmark("http://127.0.0.1:8765",str(output/"example_request_records.json"),str(output/"benchmark.json"))
+        if identity(output) != bound:
+            raise ValueError("Candidate changed during HTTP benchmark")
+        measured["identity"] = bound
+        write_json(output/"benchmark.json", measured)
         invalid = httpx.post("http://127.0.0.1:8765/predict",json={"records":[{}]})
         write_json(output/"bad_request_demo.json",{"status_code":invalid.status_code,"response":invalid.json()})
         if invalid.status_code != 422 or not measured["passed"]:

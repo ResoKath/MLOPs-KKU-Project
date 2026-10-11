@@ -32,7 +32,8 @@ def benchmark(url="http://127.0.0.1:8000", records_path="artifacts/example_reque
                   "p95_seconds": float(np.percentile(latencies,95)),
                   "throughput_requests_per_second": (count-errors)/elapsed,
                   "error_rate": errors/count, "elapsed_seconds": elapsed,
-                  "scope": "localhost HTTP; CPU; one record/request; not container or production load"}
+                  "scope": "HTTP client measurement; one record/request; deployment context recorded by caller",
+                  "target_url": url}
         result["slo"] = {"p95_seconds_max": 1.0, "throughput_min": 10.0, "error_rate_max": 0.01}
         result["passed"] = result["p95_seconds"] <= 1 and result["throughput_requests_per_second"] >= 10 and result["error_rate"] <= .01
         Path(out).write_text(json.dumps(result, indent=2), encoding="utf8")

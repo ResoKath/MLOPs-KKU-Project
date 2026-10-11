@@ -9,6 +9,7 @@ import pandas as pd
 
 from food_delivery.preprocessing import prepare_data
 from food_delivery.train import write_json
+from food_delivery.evidence import verify_quality
 
 
 def checks(data="input/Zomato Dataset.csv",out="artifacts", inject=None):
@@ -24,17 +25,13 @@ def checks(data="input/Zomato Dataset.csv",out="artifacts", inject=None):
             data = str(path)
         prepare_data(data)
         stages["data_validation"] = "PASSED"
-        quality = json.loads((Path(out)/"gate.json").read_text())
-        if inject == "model":
-            quality["passed"] = False
-        if not quality["passed"]:
-            raise ValueError("Model quality gate failed")
+        quality = verify_quality(data, out, degrade=inject == "model")
         stages["model_quality"] = "PASSED"
     except Exception as error:
         result = {"passed":False,"checks":stages,"error":str(error),"injection":inject,"execution":"local CLI; hosted CI needs GitHub run evidence"}
         write_json(Path(out)/f"ci_{inject or 'normal'}.json",result)
         raise
-    result = {"passed":True,"checks":stages,"execution":"local CLI; hosted CI needs GitHub run evidence"}
+    result = {"passed":True,"checks":stages,"model_evidence":quality,"execution":"local CLI; hosted CI needs GitHub run evidence"}
     write_json(Path(out)/"ci_normal.json",result)
     return result
 

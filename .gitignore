@@ -12,4 +12,6 @@ artifacts/
 artifacts-container/
 *.log
 *.zip
+*.bundle
+CHECKSUMS.sha256
 input/mlop.original.ipynb

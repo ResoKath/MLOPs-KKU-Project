@@ -9,4 +9,4 @@ COPY pyproject.toml /app/pyproject.toml
 RUN mkdir -p /app/artifacts
 EXPOSE 8000
 HEALTHCHECK --interval=30s --start-period=180s CMD python -c "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready')"
-CMD ["python", "-m", "food_delivery.pipeline", "--serve"]
+CMD ["python", "-m", "food_delivery.launch"]

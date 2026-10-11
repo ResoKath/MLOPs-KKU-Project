@@ -11,6 +11,8 @@ from pathlib import Path
 import joblib
 import pandas as pd
 from fastapi import FastAPI, HTTPException
+from fastapi.exceptions import RequestValidationError
+from fastapi.exception_handlers import request_validation_exception_handler
 from fastapi.responses import PlainTextResponse
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -42,6 +44,13 @@ def create_app(model_path=None, log_path=None):
         yield
 
     app = FastAPI(title="Food Delivery Time Prediction", version="1.0.0", lifespan=lifespan)
+
+    @app.exception_handler(RequestValidationError)
+    async def invalid_payload(request, exc):
+        if request.url.path == "/predict":
+            with lock:
+                counters["invalid"] += 1
+        return await request_validation_exception_handler(request, exc)
 
     @app.get("/health/live")
     def live():

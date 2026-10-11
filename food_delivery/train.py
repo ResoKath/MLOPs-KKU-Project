@@ -167,9 +167,12 @@ def run(data_path, out="artifacts", with_tabpfn=False, device="cuda", train_rows
     client.set_registered_model_alias(registry_name, "candidate", version.version)
     registry_model = mlflow.sklearn.load_model(f"models:/{registry_name}/{version.version}")
     np.testing.assert_allclose(bundle.predict(raw_example), registry_model.predict(raw_example), rtol=1e-8)
+    bundle.metadata.update({"version": version.version, "registry_name": registry_name})
     joblib.dump(bundle, out/"candidate.joblib")
     raw_example.astype(object).where(raw_example.notna(), None).to_json(out/"example_request_records.json", orient="records", indent=2)
     decision = {"passed": True, "max_mae": max_mae, "registry_name": registry_name, "version": version.version,
+                "run_id": run_ids[selected], "data_sha256": provenance["data_sha256"],
+                "candidate_sha256": hashlib.sha256((out/"candidate.joblib").read_bytes()).hexdigest(),
                 "model_uri": info.model_uri, "registry_reload": "PASSED", "selected": selected,
                 "status": "candidate; API latency/artifact gates required before approval"}
     write_json(out/"gate.json", decision)

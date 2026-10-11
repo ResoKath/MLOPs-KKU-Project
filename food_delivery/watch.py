@@ -11,16 +11,25 @@ def tick(out="artifacts"):
     out = Path(out)
     selection = json.loads((out/"selection.json").read_text())
     baseline_mae = selection["validation"][selection["selected"]]["mae"]
-    result = from_events(out/"reference_features.csv",out/"events.db",out/"monitor_live.json",baseline_mae)
     state_path = out/"monitor_state.json"
-    state = json.loads(state_path.read_text()) if state_path.exists() else {"degraded_windows":0,"previous_window":None}
-    if result["label_window_id"] != state["previous_window"]:
+    state = json.loads(state_path.read_text()) if state_path.exists() else {"degraded_windows":0,"consumed_labels":[]}
+    approval = json.loads((out/"approval.json").read_text())
+    if state.get("model_version") != approval["version"]:
+        state = {"degraded_windows":0,"consumed_labels":[],"model_version":approval["version"]}
+    result = from_events(out/"reference_features.csv",out/"events.db",out/"monitor_live.json",baseline_mae,
+                         model_version=approval["version"], consumed_labels=state.get("consumed_labels",[]))
+    if result["label_rows"] >= 100:
         state["degraded_windows"] = state["degraded_windows"]+1 if result.get("retrain_requested") else 0
-        state["previous_window"] = result["label_window_id"]
+        state["consumed_labels"] = list(set(state.get("consumed_labels",[])) | set(result["label_request_ids"]))
+        state["last_quality"] = {key: result[key] for key in ["quality_status", "mae", "quality_threshold", "concept_drift_signal", "retrain_requested"] if key in result}
+    elif state.get("last_quality"):
+        result.update(state["last_quality"])
+        result["quality_scope"] = "last completed non-overlapping label window; waiting for 100 new labels"
+        write_json(out/"monitor_live.json", result)
     write_json(state_path,state)
     if state["degraded_windows"] >= 2:
         write_json(out/"retrain_request.json",{"reason":"delayed-label MAE degraded", "status":"review fresh labeled data and run pipeline",
-                   "policy":"minimum 100 verified labels; two consecutive distinct degraded windows; preserve new chronological test"})
+                   "policy":"minimum 100 new labels per non-overlapping window; label verification requires human review; preserve new chronological test"})
     return result
 
 
