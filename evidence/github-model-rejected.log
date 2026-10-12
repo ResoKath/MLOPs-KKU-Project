@@ -1,0 +1,33 @@
+quality	Run if [ "$INJECT" = none ]; then	﻿2026-10-11T09:52:07.7607974Z ##[group]Run if [ "$INJECT" = none ]; then
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7608314Z ^[[36;1mif [ "$INJECT" = none ]; then^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7608626Z ^[[36;1m  python -m food_delivery.ci_checks^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7608885Z ^[[36;1melse^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7609144Z ^[[36;1m  python -m food_delivery.ci_checks --inject "$INJECT"^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7609437Z ^[[36;1mfi^[[0m
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7671201Z shell: /usr/bin/bash -e {0}
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7671488Z env:
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7671686Z   OMP_NUM_THREADS: 2
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7671887Z   OPENBLAS_NUM_THREADS: 2
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7672254Z   PREFECT_HOME: /home/runner/work/MLOPs-KKU-Project/MLOPs-KKU-Project/artifacts/prefect
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7672664Z   PREFECT_SERVER_ANALYTICS_ENABLED: false
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7672955Z   pythonLocation: /opt/hostedtoolcache/Python/3.13.5/x64
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7673310Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.13.5/x64/lib/pkgconfig
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7673650Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.5/x64
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7674254Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.5/x64
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7674780Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.13.5/x64
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7675100Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.13.5/x64/lib
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7675394Z   INJECT: model
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:07.7675590Z ##[endgroup]
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:09.4995671Z All checks passed!
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6935064Z Traceback (most recent call last):
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6946336Z   File "<frozen runpy>", line 198, in _run_module_as_main
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6947025Z   File "<frozen runpy>", line 88, in _run_code
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6948009Z   File "/home/runner/work/MLOPs-KKU-Project/MLOPs-KKU-Project/food_delivery/ci_checks.py", line 44, in <module>
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6948795Z     print(json.dumps(checks(a.data,inject=a.inject),indent=2))
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6949342Z                      ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6950131Z   File "/home/runner/work/MLOPs-KKU-Project/MLOPs-KKU-Project/food_delivery/ci_checks.py", line 28, in checks
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6951045Z     quality = verify_quality(data, out, degrade=inject == "model")
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6951899Z   File "/home/runner/work/MLOPs-KKU-Project/MLOPs-KKU-Project/food_delivery/evidence.py", line 43, in verify_quality
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6962911Z     raise ValueError(f"Recomputed model quality gate failed: {measured}")
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:12.6964576Z ValueError: Recomputed model quality gate failed: {'validation': {'mae': 19.926632240277144, 'rmse': 20.368218024174215, 'r2': -3.597892502583589, 'within_5_minutes': 0.0006768189509306261}, 'test': {'mae': 19.918326874606635, 'rmse': 20.36739848715424, 'r2': -3.8213917777595805, 'within_5_minutes': 0.0013493000505987519}}
+quality	Run if [ "$INJECT" = none ]; then	2026-10-11T09:52:13.1805351Z ##[error]Process completed with exit code 1.

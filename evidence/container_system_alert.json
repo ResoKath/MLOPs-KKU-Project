@@ -1,0 +1,44 @@
+{
+  "passed": true,
+  "alerts": {
+    "status": "success",
+    "data": {
+      "alerts": [
+        {
+          "labels": {
+            "alertname": "DeliveryAPIDown",
+            "instance": "api:8000",
+            "job": "food-delivery",
+            "severity": "critical"
+          },
+          "annotations": {},
+          "state": "firing",
+          "activeAt": "2026-10-11T10:05:47.864120429Z",
+          "value": "0e+00"
+        }
+      ]
+    }
+  },
+  "history": [
+    {
+      "time": 1791713123.716783,
+      "states": {
+        "DeliveryDataDrift": "firing",
+        "DeliveryQualityDegraded": "firing"
+      }
+    },
+    {
+      "time": 1791713149.9343326,
+      "states": {
+        "DeliveryAPIDown": "pending"
+      }
+    },
+    {
+      "time": 1791713271.0887902,
+      "states": {
+        "DeliveryAPIDown": "firing"
+      }
+    }
+  ],
+  "scope": "actual Prometheus firing state; outbound notification receiver not configured"
+}

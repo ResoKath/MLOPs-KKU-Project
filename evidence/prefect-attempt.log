@@ -1,0 +1,148 @@
+ Container g-p-6ac9e05c7e6c81918c83498fafd0b293-api-run-7a03572a4354 Creating 
+ Container g-p-6ac9e05c7e6c81918c83498fafd0b293-api-run-7a03572a4354 Created 
+Collecting fastapi==0.136.3
+  Downloading fastapi-0.136.3-py3-none-any.whl.metadata (27 kB)
+Collecting starlette==0.52.1
+  Downloading starlette-0.52.1-py3-none-any.whl.metadata (6.3 kB)
+Requirement already satisfied: pydantic>=2.9.0 in /usr/local/lib/python3.13/site-packages (from fastapi==0.136.3) (2.14.0)
+Requirement already satisfied: typing-extensions>=4.8.0 in /usr/local/lib/python3.13/site-packages (from fastapi==0.136.3) (4.16.0)
+Requirement already satisfied: typing-inspection>=0.4.2 in /usr/local/lib/python3.13/site-packages (from fastapi==0.136.3) (0.4.4)
+Requirement already satisfied: annotated-doc>=0.0.2 in /usr/local/lib/python3.13/site-packages (from fastapi==0.136.3) (0.0.5)
+Requirement already satisfied: anyio<5,>=3.6.2 in /usr/local/lib/python3.13/site-packages (from starlette==0.52.1) (4.15.1)
+Requirement already satisfied: idna>=2.8 in /usr/local/lib/python3.13/site-packages (from anyio<5,>=3.6.2->starlette==0.52.1) (3.20)
+Requirement already satisfied: annotated-types>=0.6.0 in /usr/local/lib/python3.13/site-packages (from pydantic>=2.9.0->fastapi==0.136.3) (0.8.0)
+Requirement already satisfied: pydantic-core==2.50.0 in /usr/local/lib/python3.13/site-packages (from pydantic>=2.9.0->fastapi==0.136.3) (2.50.0)
+Downloading fastapi-0.136.3-py3-none-any.whl (117 kB)
+Downloading starlette-0.52.1-py3-none-any.whl (74 kB)
+Installing collected packages: starlette, fastapi
+  Attempting uninstall: starlette
+    Found existing installation: starlette 1.7.0
+    Uninstalling starlette-1.7.0:
+      Successfully uninstalled starlette-1.7.0
+  Attempting uninstall: fastapi
+    Found existing installation: fastapi 0.143.0
+    Uninstalling fastapi-0.143.0:
+      Successfully uninstalled fastapi-0.143.0
+
+Successfully installed fastapi-0.136.3 starlette-0.52.1
+WARNING: Running pip as the 'root' user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.
+
+[notice] A new release of pip is available: 25.1.1 -> 26.2.1
+[notice] To update, run: pip install --upgrade pip
+10:12:12.859 | INFO    | prefect - Starting temporary server on http://127.0.0.1:8440
+See https://docs.prefect.io/v3/concepts/server#how-to-guides for more information on running a dedicated Prefect server.
+10:12:17.559 | WARNING | prefect.server - Unable to write to memo_store.toml at /root/.prefect/memo_store.toml after block auto-registration: FileNotFoundError(2, 'No such file or directory').
+ Subsequent server start ups will perform block auto-registration, which may result in slower server startup.
+10:12:17.788 | INFO    | Flow run 'certain-griffin' - Beginning flow run 'certain-griffin' for flow 'food-delivery-end-to-end'
+10:12:18.271 | INFO    | Task run 'validate-and-temporal-split-e1b' - Finished in state Completed()
+2026/10/11 10:12:18 INFO mlflow.store.db.utils: Creating initial MLflow database tables...
+2026/10/11 10:12:18 INFO mlflow.store.db.utils: Updating database tables
+2026/10/11 10:12:24 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git SHA is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+
+2026/10/11 10:12:24 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git branch is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+
+2026/10/11 10:12:24 WARNING mlflow.utils.git_utils: Failed to import Git (the Git executable is probably not on your PATH), so Git repository URL is not available. Error: Failed to initialize: Bad git executable.
+The git executable must be specified in one of the following ways:
+    - be included in your $PATH
+    - be set via $GIT_PYTHON_GIT_EXECUTABLE
+    - explicitly set via git.refresh(<full-path-to-git-executable>)
+
+All git commands will error until this is rectified.
+
+This initial message can be silenced or aggravated in the future by setting the
+$GIT_PYTHON_REFRESH environment variable. Use one of the following values:
+    - quiet|q|silence|s|silent|none|n|0: for no message or exception
+    - warn|w|warning|log|l|1: for a warning message (logging level CRITICAL, displayed by default)
+    - error|e|exception|raise|r|2: for a raised exception
+
+Example:
+    export GIT_PYTHON_REFRESH=quiet
+
+/usr/local/lib/python3.13/site-packages/mlflow/types/utils.py:440: UserWarning: Hint: Inferred schema contains integer column(s). Integer columns in Python cannot represent missing values. If your input data contains missing values at inference time, it will be encoded as floats and will cause a schema enforcement error. The best way to avoid this problem is to infer the model schema based on a realistic data sample (training dataset) that includes missing values. Alternatively, you can declare integer columns as doubles (float64) whenever these columns may have missing values. See `Handling Integers With Missing Values <https://www.mlflow.org/docs/latest/models.html#handling-integers-with-missing-values>`_ for more details.
+  warnings.warn(
+2026/10/11 10:12:33 WARNING mlflow.sklearn: Saving scikit-learn models in the pickle or cloudpickle format requires exercising caution because these formats rely on Python's object serialization mechanism, which can execute arbitrary code during deserialization. The recommended safe alternative is the 'skops' format. For more information, see: https://scikit-learn.org/stable/model_persistence.html
+Successfully registered model 'food-delivery-hist_gradient_boosting'.
+Created version '1' of model 'food-delivery-hist_gradient_boosting'.
+10:12:36.290 | INFO    | Task run 'fit-preprocess-train-compare-evaluate-register-b88' - {
+  "selected": "hist_gradient_boosting",
+  "validation": {
+    "dummy": {
+      "mae": 7.6885143147208135,
+      "rmse": 9.498956398822681,
+      "r2": -1.043457064864306e-05,
+      "within_5_minutes": 0.37225042301184436,
+      "fit_validation_seconds": 1.4983312740000656
+    },
+    "linear": {
+      "mae": 4.863155772847651,
+      "rmse": 6.104405815763077,
+      "r2": 0.5870099979460092,
+      "within_5_minutes": 0.5810490693739425,
+      "fit_validation_seconds": 1.7793773989997135
+    },
+    "hist_gradient_boosting": {
+      "mae": 3.363554398539753,
+      "rmse": 4.242016161448773,
+      "r2": 0.8005668353596431,
+      "within_5_minutes": 0.770896785109983,
+      "fit_validation_seconds": 2.225806263999857
+    }
+  },
+  "test": {
+    "hist_gradient_boosting": {
+      "mae": 3.401824480477007,
+      "rmse": 4.262690067605291,
+      "r2": 0.7888122048200248,
+      "within_5_minutes": 0.7699443413729128
+    }
+  },
+  "registry": {
+    "passed": true,
+    "max_mae": 5.0,
+    "registry_name": "food-delivery-hist_gradient_boosting",
+    "version": 1,
+    "run_id": "a9b8e5e43ea44d438f7a5f71bfa12f8c",
+    "data_sha256": "e33e182ebb9c1d7e0f54c83c0cef6ddc5aa98d203e8888d33ab68cca3a079cba",
+    "candidate_sha256": "973fa7f887e06ac4afd4b18bed9397b2105d35084a8ed1489dddfda54dbbe722",
+    "model_uri": "models:/m-ef7a087ba1634d7db8fedd1925bfbd1f",
+    "registry_reload": "PASSED",
+    "selected": "hist_gradient_boosting",
+    "status": "candidate; API latency/artifact gates required before approval"
+  }
+}
+10:12:36.298 | INFO    | Task run 'fit-preprocess-train-compare-evaluate-register-b88' - Finished in state Completed()
+10:12:45.405 | INFO    | Task run 'serve-and-measure-http-408' - Finished in state Completed()
+10:12:45.709 | INFO    | Task run 'approve-local-champion-910' - Finished in state Completed()
+10:12:45.824 | INFO    | Task run 'monitor-recent-events-c86' - Finished in state Completed()
+10:12:45.872 | INFO    | Flow run 'certain-griffin' - Finished in state Completed()
+10:12:45.888 | INFO    | prefect - Stopping temporary server on http://127.0.0.1:8440

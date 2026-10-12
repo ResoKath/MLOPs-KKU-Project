@@ -1,0 +1,62 @@
+name: Validate train package
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      inject:
+        description: Deliberately reject bad data or predictions; none is normal deployment
+        required: true
+        default: none
+        type: choice
+        options: [none, data, model]
+jobs:
+  quality:
+    runs-on: ubuntu-latest
+    env:
+      OMP_NUM_THREADS: 2
+      OPENBLAS_NUM_THREADS: 2
+      PREFECT_HOME: ${{ github.workspace }}/artifacts/prefect
+      PREFECT_SERVER_ANALYTICS_ENABLED: false
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python -m ruff check food_delivery tests
+      - run: python -m pytest -q
+      - run: python -m food_delivery.pipeline
+      - run: python -m food_delivery.pipeline --engine prefect --out artifacts/prefect-ci
+      - run: |
+          if [ "$INJECT" = none ]; then
+            python -m food_delivery.ci_checks
+          else
+            python -m food_delivery.ci_checks --inject "$INJECT"
+          fi
+        env:
+          INJECT: ${{ inputs.inject || 'none' }}
+      - run: docker build -t food-delivery:${{ github.sha }} .
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: evidence-and-model
+          path: artifacts/
+  deploy-demo:
+    needs: quality
+    if: github.event_name == 'workflow_dispatch' && inputs.inject == 'none'
+    runs-on: ubuntu-latest
+    environment: demo
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker compose up --build -d
+      - run: |
+          for attempt in $(seq 1 60); do
+            if curl -fsS http://localhost:8000/health/ready; then exit 0; fi
+            sleep 5
+          done
+          docker compose logs
+          exit 1
+      - run: docker compose down
+        if: always()

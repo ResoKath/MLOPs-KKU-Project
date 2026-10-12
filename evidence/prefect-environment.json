@@ -1,0 +1,17 @@
+{
+  "data_sha256": "e33e182ebb9c1d7e0f54c83c0cef6ddc5aa98d203e8888d33ab68cca3a079cba",
+  "source_sha256": "b911d6f7107502a6ed73a4ea908fe4cc606adbb2e6945fdc632c8de214870ded",
+  "git_commit": "unavailable; use source_sha256",
+  "python": "3.13.5",
+  "platform": "Linux-5.15.167.4-microsoft-standard-WSL2-x86_64-with-glibc2.36",
+  "libraries": {
+    "pandas": "2.3.0",
+    "numpy": "2.3.1",
+    "scikit-learn": "1.9.1",
+    "mlflow": "3.16.1",
+    "fastapi": "0.136.3",
+    "joblib": "1.5.3"
+  },
+  "training_policy": "seeded random train-only sample; 5000 default; frozen before test",
+  "test_policy": "full test evaluated only for validation-selected winner and TabPFN audit; never tune on test"
+}

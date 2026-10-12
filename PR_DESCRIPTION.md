@@ -1,0 +1,11 @@
+# Complete reproducible food delivery training, serving and monitoring
+
+The notebook depended on session variables for inference and lacked a reproducible path from raw data to an approved API model. This change adds shared validation/preprocessing, chronological splits, three baseline experiments, full held-out evaluation, MLflow provenance/config/model reload checks, versioned registry gates, a FastAPI service, a repeatable DAG, and Docker/Prometheus/GitHub Actions workflows. Existing group files and their history are retained.
+
+The CPU serving candidate is HGB (test MAE 3.4018 minutes). A separate, actually executed TabPFN CUDA experiment evaluated all 5,929 test rows (MAE 3.1479 minutes); its foundation checkpoint exceeds the current 100 MB serving gate, so it remains a quality-passed candidate. No private credentials or foundation checkpoint are included in Git.
+
+Promotion evidence is bound to the candidate checksum, training run and registry version. CI recomputes predictions and can deliberately reject degraded predictions; monitoring separates model versions and consumes non-overlapping label windows. Container startup preserves the approved model for restart/rollback.
+
+Validation: 22 tests passed on Windows; Docker built and served through the host port; measured p95 342 ms and throughput 16.5 requests/s passed the SLO. Prometheus actually fired data/quality and availability alerts. Isolated synthetic feedback/retraining produced registry versions 1→2→1; actual container HTTP predictions changed by 12 minutes and returned exactly after rollback, then the original serving model was restored. Hosted Actions passed all three quality checks and temporary container deployment; deliberate data and prediction degradation runs were rejected. Prefect completed the full flow in Linux after pinning compatible FastAPI/Starlette versions, and CI now checks that flow too.
+
+The pipeline also rejects a candidate that is worse than the approved incumbent on the same validation set before test/registration. Synthetic labels are clearly identified; real stakeholder confirmation, business pilot measurements and group member contributions remain group work. See REPORT.md, COMPLETION_REPORT.md, DEMO_GUIDE.md and evidence/. No public production hosting or outbound notification receiver is claimed.
